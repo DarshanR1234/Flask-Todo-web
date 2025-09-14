@@ -1,0 +1,72 @@
+/* Font setup */
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Flash messages compact & animated */
+.flash-message {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: slideIn 0.3s forwards;
+}
+
+/* Slide in animation */
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Rounded corners for cards */
+.rounded-2xl {
+  border-radius: 1rem;
+}
+
+/* Small hover lift for buttons & links */
+a, button {
+  transition: transform 0.12s ease, background-color 0.2s ease;
+}
+a:hover, button:hover {
+  transform: translateY(-1px);
+}
+
+/* Input focus styling */
+input:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5); /* Indigo-500 ring */
+}
+
+/* Task cards hover */
+.task-card:hover {
+  transform: scale(1.01);
+  transition: transform 0.15s ease;
+}
+
+/* Buttons shadow */
+button {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Flash messages dark mode */
+.dark .flash-message {
+  background-color: #1e293b; /* slate-800 */
+  border-left-color: #3b82f6; /* indigo-500 */
+  color: #f1f5f9; /* slate-100 */
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .flex-col-sm {
+    flex-direction: column;
+  }
+}
+
+/* Small spacing adjustments for flash messages */
+.flash-message + .flash-message {
+  margin-top: 0.5rem;
+}

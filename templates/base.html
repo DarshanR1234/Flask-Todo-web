@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Todo App{% endblock %}</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-50 via-pink-50 to-yellow-50 text-slate-800 dark:bg-slate-900 dark:text-slate-200 transition-colors duration-300">
+
+  <!-- NAVBAR -->
+  <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="{{ url_for('home') }}" class="text-xl font-bold">Todo</a>
+      <nav>
+        {% if session.get('user_id') %}
+          <span class="mr-4">Hello, {{ session.username }}</span>
+          <a href="{{ url_for('logout') }}" class="px-4 py-2 bg-red-500 rounded-md hover:bg-red-600 transition">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}" class="px-4 py-2 bg-indigo-500 rounded-md hover:bg-indigo-600 transition mr-2">Login</a>
+          <a href="{{ url_for('register') }}" class="px-4 py-2 bg-green-500 rounded-md hover:bg-green-600 transition">Register</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <!-- Flash messages -->
+  <div class="container mx-auto px-6 mt-6">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="space-y-3">
+          {% for category, msg in messages %}
+            <div class="rounded-lg p-3 shadow-sm
+              {% if category=='success' %}bg-green-50 border-l-4 border-green-400
+              {% elif category=='danger' %}bg-red-50 border-l-4 border-red-400
+              {% elif category=='warning' %}bg-yellow-50 border-l-4 border-yellow-400
+              {% else %}bg-blue-50 border-l-4 border-blue-400{% endif %}">
+              <div class="text-sm">{{ msg }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Main content -->
+  <main class="container mx-auto px-6 py-8">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-slate-600 dark:text-slate-400">
+    Made with ❤️ • Todo • 2025
+  </footer>
+</body>
+</html>
