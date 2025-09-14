@@ -1,9 +1,0 @@
-# Virtual environments
-venv/
-venv_clean/
-venv_clean2/
-.venv/
-
-# Python cache
-__pycache__/
-*.pyc
